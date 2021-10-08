@@ -71,7 +71,8 @@ namespace DAL.ADO
                         LastName = reader["LastName"].ToString(),
                         Login = reader["Login"].ToString(),
                         Password = reader["Password"].ToString(),
-                        RowInsertTime = DateTime.Parse(reader["RowInsertTime"].ToString())
+                        RowInsertTime = DateTime.Parse(reader["RowInsertTime"].ToString()),
+                        RowUpdateTime = DateTime.Parse(reader["RowUpdateTime"].ToString())
                     });
                 }
                 conn.Close();
@@ -100,12 +101,12 @@ namespace DAL.ADO
             }
         }
 
-        public PersonDTO UpdatePerson(PersonDTO p)
+        public PersonDTO UpdatePerson(PersonDTO p, int id)
         {
             using (SqlConnection conn = new SqlConnection(this._connStr))
             using (SqlCommand comm = conn.CreateCommand())
             {
-                comm.CommandText = "UPDATE Person set  ID_Role, FirsName, LastName,Login,Password = @id_rol,@firsn,@lastn,@log,@passw";
+                comm.CommandText = $"UPDATE Person set ID_Role = @id_rol, FirstName = @firsn, LastName = @lastn, Login = @log ,Password = @passw, RowUpdateTime = @rowup WHERE ID_Person = {id} "; ;
 
                 comm.Parameters.Clear();
 
@@ -114,11 +115,13 @@ namespace DAL.ADO
                 comm.Parameters.AddWithValue("@lastn", p.LastName);
                 comm.Parameters.AddWithValue("@log", p.Login);
                 comm.Parameters.AddWithValue("@passw", p.Password);
+                comm.Parameters.AddWithValue("@rowup", p.RowUpdateTime);
+
 
 
                 conn.Open();
 
-                p.ID_Person = (int)comm.ExecuteScalar();
+                p.ID_Person = comm.ExecuteNonQuery();
                 conn.Close();
                 return p;
             }

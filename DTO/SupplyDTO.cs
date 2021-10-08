@@ -12,5 +12,6 @@ namespace DTO
         public int Number { get; set; }
         public int PriceUnit { get; set; }
         public DateTime RowInsertTime { get; set;}
-     }
+        public DateTime RowUpdateTime { get; set; }
+    }
 }

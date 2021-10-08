@@ -12,6 +12,6 @@ namespace DTO
         public string Login { get; set; }
         public string Password { get; set; }
         public DateTime RowInsertTime { get; set; }
-
+        public DateTime RowUpdateTime { get; set; }
     }
 }

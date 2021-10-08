@@ -62,7 +62,7 @@ namespace DAL.ADO
                     {
                         ID_Role = (int)reader["ID_Role"],
                         RoleName = reader["RoleName"].ToString(),
-                        RowInsertTime = DateTime.Parse(reader["RowInsertTime"].ToString())
+                        RowInsertTime = DateTime.Parse(reader["RowInsertTime"].ToString()),
                     });
                 }
                 conn.Close();
@@ -92,20 +92,22 @@ namespace DAL.ADO
             }
         }
 
-        public RolesDTO UpdateRoles(RolesDTO roles)
+        public RolesDTO UpdateRoles(RolesDTO roles, int id)
         {
             using (SqlConnection conn = new SqlConnection(this._connStr))
             using (SqlCommand comm = conn.CreateCommand())
             {
-                comm.CommandText = "UPDATE Roles set  RoleName = @rol ";
+                comm.CommandText = $"UPDATE Roles set  RoleName = @rol, RowUpdateTime = @rowup WHERE ID_Role = {id} ";
 
                 comm.Parameters.Clear();
 
                 comm.Parameters.AddWithValue("@rol", roles.RoleName);
+                comm.Parameters.AddWithValue("@rowup", roles.RowUpdateTime);
+
 
                 conn.Open();
 
-                roles.ID_Role = (int)comm.ExecuteScalar();
+                roles.ID_Role = comm.ExecuteNonQuery();
                 conn.Close();
                 return roles;
             }

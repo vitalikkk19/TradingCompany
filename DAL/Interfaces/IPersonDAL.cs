@@ -7,7 +7,7 @@ namespace DAL.Interfaces
     {
         List<PersonDTO> GetAllPerson();
         PersonDTO GetPersonById(int personId);
-        PersonDTO UpdatePerson(PersonDTO p);
+        PersonDTO UpdatePerson(PersonDTO p, int id);
         PersonDTO CreatPerson(PersonDTO p);
         void DeletePerson(int personId);
     }

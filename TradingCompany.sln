@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{8EBE2756-6E2F-4696-A6C4-5F9F29333AA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.Tests", "DAL.Tests\DAL.Tests.csproj", "{C28F1FD0-5B6F-4086-964A-31DCCD752BCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8EBE2756-6E2F-4696-A6C4-5F9F29333AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EBE2756-6E2F-4696-A6C4-5F9F29333AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EBE2756-6E2F-4696-A6C4-5F9F29333AA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C28F1FD0-5B6F-4086-964A-31DCCD752BCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C28F1FD0-5B6F-4086-964A-31DCCD752BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C28F1FD0-5B6F-4086-964A-31DCCD752BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C28F1FD0-5B6F-4086-964A-31DCCD752BCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

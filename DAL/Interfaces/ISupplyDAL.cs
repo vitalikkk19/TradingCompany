@@ -8,7 +8,7 @@ namespace DAL.Interfaces
     {
         List<SupplyDTO> GetAllSupply();
         SupplyDTO GetSupplyById(int supplyId);
-        SupplyDTO UpdateSupply(SupplyDTO s);
+        SupplyDTO UpdateSupply(SupplyDTO s, int id);
         SupplyDTO CreatSupply(SupplyDTO s);
         void DeleteSupply(int supplyId);
     }

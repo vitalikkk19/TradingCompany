@@ -70,7 +70,8 @@ namespace DAL.ADO
                         NameGoods = reader["NameGoods"].ToString(),
                         Number = (int)reader["Number"],
                         PriceUnit = (int)reader["PriceUnit"],
-                        RowInsertTime = DateTime.Parse(reader["RowInsertTime"].ToString())
+                        RowInsertTime = DateTime.Parse(reader["RowInsertTime"].ToString()),
+                        RowUpdateTime = DateTime.Parse(reader["RowUpdateTime"].ToString())
                     }); 
                 }
                 conn.Close();
@@ -99,25 +100,27 @@ namespace DAL.ADO
             }
         }
 
-        public SupplyDTO UpdateSupply(SupplyDTO s)
+        public SupplyDTO UpdateSupply(SupplyDTO s, int id)
         {
             using (SqlConnection conn = new SqlConnection(this._connStr))
             using (SqlCommand comm = conn.CreateCommand())
             {
-                comm.CommandText = "UPDATE Supple set  ID_Person, ID_Category,NameGoods,Number,PriceUnit = @id_per,@id_cat,@nameGoods,@num,@priceu";
+                comm.CommandText = $"UPDATE Supply set ID_Person = @id_per, ID_Category = @id_cat, NameGoods = @nameg, Number = @num ,PriceUnit = @pu, RowUpdateTime = @rowup WHERE ID_Sypply = {id} "; ;
 
                 comm.Parameters.Clear();
 
                 comm.Parameters.AddWithValue("@id_per", s.ID_Person);
                 comm.Parameters.AddWithValue("@id_cat", s.ID_Category);
-                comm.Parameters.AddWithValue("@nameGoods", s.NameGoods);
+                comm.Parameters.AddWithValue("@nameg", s.NameGoods);
                 comm.Parameters.AddWithValue("@num", s.Number);
-                comm.Parameters.AddWithValue("@priceu", s.PriceUnit);
+                comm.Parameters.AddWithValue("@pu", s.PriceUnit);
+                comm.Parameters.AddWithValue("@rowup", s.RowUpdateTime);
+
 
 
                 conn.Open();
 
-                s.ID_Supply = (int)comm.ExecuteScalar();
+                s.ID_Supply = comm.ExecuteNonQuery();
                 conn.Close();
                 return s;
             }

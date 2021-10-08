@@ -8,7 +8,7 @@ namespace DAL.Interfaces
     {
         List<CategoryDTO> GetAllCategory();
         CategoryDTO GetCategoryById(int сategoryId);
-        CategoryDTO UpdateCategory(CategoryDTO с);
+        CategoryDTO UpdateCategory(CategoryDTO с, int id);
         CategoryDTO CreateCategory(CategoryDTO с);
         void DeleteCategory(int сategoryId);
     }

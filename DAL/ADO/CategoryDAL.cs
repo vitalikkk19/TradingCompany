@@ -63,7 +63,8 @@ namespace DAL.ADO
                     {
                         ID_Category = (int)reader["ID_Category"],
                         CategoryName = reader["CategoryName"].ToString(),
-                        RowInsertTime = DateTime.Parse(reader["RowInsertTime"].ToString())
+                        RowInsertTime = DateTime.Parse(reader["RowInsertTime"].ToString()),
+                        RowUpdateTime = DateTime.Parse(reader["RowUpdateTime"].ToString())
                     });
                 }
                 conn.Close();
@@ -93,23 +94,29 @@ namespace DAL.ADO
             }
         }
 
-        public CategoryDTO UpdateCategory(CategoryDTO сategory)
+        public CategoryDTO UpdateCategory(CategoryDTO сategory,int id)
         {
+     
             using (SqlConnection conn = new SqlConnection(this._connStr))
             using (SqlCommand comm = conn.CreateCommand())
             {
-                comm.CommandText = "UPDATE Category set  CategoryName = @catn ";
+                comm.CommandText = $"UPDATE Category set  CategoryName = @cat, RowUpdateTime = @rowup WHERE ID_Category = {id} ";
 
                 comm.Parameters.Clear();
 
-                comm.Parameters.AddWithValue("@catn", сategory.CategoryName);
-                
+                comm.Parameters.AddWithValue("@cat", сategory.CategoryName);
+                comm.Parameters.AddWithValue("@rowup", сategory.RowUpdateTime);
+
+
                 conn.Open();
 
-                сategory.ID_Category = (int)comm.ExecuteScalar();
+                сategory.ID_Category = comm.ExecuteNonQuery();  
                 conn.Close();
                 return сategory;
             }
         }
+
+
+
     }
 }

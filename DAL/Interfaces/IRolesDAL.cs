@@ -8,7 +8,7 @@ namespace DAL.Interfaces
     {
         List<RolesDTO> GetAllRoles();
         RolesDTO GetRolesById(int rolesId);
-        RolesDTO UpdateRoles(RolesDTO r);
+        RolesDTO UpdateRoles(RolesDTO r, int id);
         RolesDTO CreatRoles(RolesDTO r);
         void DeleteRoles(int rolesId);
     }
