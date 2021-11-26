@@ -43,10 +43,10 @@ namespace DAL.ADO
             using (SqlConnection conn = new SqlConnection(this._connStr))
             using (SqlCommand comm = conn.CreateCommand())
             {
+                conn.Open();
                 comm.CommandText = "DELETE from Supply WHERE ID_Supply = @id";
                 comm.Parameters.Clear();
                 comm.Parameters.AddWithValue("@id", supplyId);
-                conn.Open();
                 comm.ExecuteNonQuery();
             }
         }
@@ -100,12 +100,39 @@ namespace DAL.ADO
             }
         }
 
+        public List<SupplyDTO> GetSupplyByIdCategory(int CatId)
+        {
+            using (SqlConnection conn = new SqlConnection(this._connStr))
+            using (SqlCommand comm = conn.CreateCommand())
+            {
+                comm.CommandText = $"SELECT * FROM Supply WHERE ID_Category = {CatId}";
+                conn.Open();
+                SqlDataReader reader = comm.ExecuteReader();
+
+                var mySupply = new List<SupplyDTO>();
+                while (reader.Read())
+                {
+                    mySupply.Add(new SupplyDTO
+                    {
+                        ID_Supply = (int)reader["ID_Supply"],
+                        ID_Person = (int)reader["ID_Person"],
+                        ID_Category = (int)reader["ID_Category"],
+                        NameGoods = (string)reader["NameGoods"],
+                        Number = (int)reader["Number"],
+                        PriceUnit = (int)reader["PriceUnit"],
+                        RowInsertTime=(DateTime)reader["RowInsertTime"]
+                    });
+                }
+                return mySupply;
+            }
+        }
+
         public SupplyDTO UpdateSupply(SupplyDTO s, int id)
         {
             using (SqlConnection conn = new SqlConnection(this._connStr))
             using (SqlCommand comm = conn.CreateCommand())
             {
-                comm.CommandText = $"UPDATE Supply set ID_Person = @id_per, ID_Category = @id_cat, NameGoods = @nameg, Number = @num ,PriceUnit = @pu, RowUpdateTime = @rowup WHERE ID_Sypply = {id} "; ;
+                comm.CommandText = $"UPDATE Supply set ID_Person = @id_per, ID_Category = @id_cat, NameGoods = @nameg, Number = @num ,PriceUnit = @pu, RowUpdateTime = @rowup WHERE ID_Sypply = {id} "; 
 
                 comm.Parameters.Clear();
 
@@ -125,5 +152,7 @@ namespace DAL.ADO
                 return s;
             }
         }
+       
+
     }
 }

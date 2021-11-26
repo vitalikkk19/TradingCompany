@@ -29,7 +29,7 @@ namespace DAL.Tests
             Assert.IsTrue(person.Any(p => p.FirstName == "Nastia"));
             Assert.IsTrue(person.Any(p => p.LastName == "Volosh"));
             Assert.IsTrue(person.Any(p => p.Login == "nastivka_lastivka"));
-            Assert.IsTrue(person.Any(p => p.Password == "20020319Petivna"));
+            //Assert.IsTrue(person.Any(p => p.Password == "20020319Petivna"));
         }
 
     }

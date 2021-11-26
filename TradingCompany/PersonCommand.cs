@@ -2,6 +2,7 @@
 using DAL.ADO;
 using DTO;
 using System.Configuration;
+using System.Text;
 
 namespace TradingCompany
 {
@@ -23,8 +24,7 @@ namespace TradingCompany
             Console.WriteLine("Input Login: ");
             string _log = Console.ReadLine();
             Console.WriteLine("Input Password: ");
-            string _passw = Console.ReadLine();
-
+            byte[] _passw = Encoding.UTF8.GetBytes(Console.ReadLine());
 
             PersonDTO myPerson = new PersonDTO
             {
@@ -146,7 +146,7 @@ namespace TradingCompany
                             
                         case "5":
                         Console.WriteLine("Input new Password: ");
-                        myPerson.Password = Console.ReadLine();
+                        //myPerson.Password = Console.ReadLine();
                         myPerson.RowUpdateTime = DateTime.UtcNow;
                         myPerson = personDal.UpdatePerson(myPerson, id);
                         Console.WriteLine($"Updated successfully!");

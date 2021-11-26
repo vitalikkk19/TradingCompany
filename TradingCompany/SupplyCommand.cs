@@ -64,6 +64,7 @@ namespace TradingCompany
             {
                 Console.WriteLine($"{s.ID_Category}\t{s.ID_Person}\t{s.ID_Supply}\t{s.NameGoods}\t\t{s.Number}\t{s.PriceUnit}\t{s.RowInsertTime}\t{s.RowUpdateTime}");
             }
+            
         }
 
         public static void DeleteSupply(SupplyDAL supplyDal)

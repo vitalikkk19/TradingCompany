@@ -11,5 +11,6 @@ namespace DAL.Interfaces
         SupplyDTO UpdateSupply(SupplyDTO s, int id);
         SupplyDTO CreatSupply(SupplyDTO s);
         void DeleteSupply(int supplyId);
+        List<SupplyDTO> GetSupplyByIdCategory(int id);
     }
 }

@@ -10,5 +10,7 @@ namespace DAL.Interfaces
         PersonDTO UpdatePerson(PersonDTO p, int id);
         PersonDTO CreatPerson(PersonDTO p);
         void DeletePerson(int personId);
+        bool Login(string login, string password);
+        PersonDTO GetPersonByLogin(string login);
     }
 }
