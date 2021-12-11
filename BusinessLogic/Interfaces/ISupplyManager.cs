@@ -14,5 +14,7 @@ namespace BusinessLogic.Interfaces
         List<SupplyDTO> GetSort();
         List<CategoryDTO> GetListOfCategory();
         List<RolesDTO> GetListOfRoles();
+        List<string> GetNameCategory();
+        List<string> GetPersonLogin();
     }
 }

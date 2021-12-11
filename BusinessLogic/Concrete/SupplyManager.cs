@@ -11,12 +11,14 @@ namespace BusinessLogic.Concrete
         private readonly ICategoryDAL _categoryDAL;
         private readonly IRolesDAL _rolesDAL;
         private readonly ISupplyDAL _supplyDAL;
+        private readonly IPersonDAL _personDAL;
 
-        public SupplyManager(ICategoryDAL categoryDAL, IPersonDAL personDAL, IRolesDAL rolesDAL, ISupplyDAL supply)
+        public SupplyManager(ICategoryDAL categoryDAL, IPersonDAL personDAL, IRolesDAL rolesDAL, ISupplyDAL supply, IPersonDAL person)
         {
             _categoryDAL = categoryDAL;
             _rolesDAL = rolesDAL;
             _supplyDAL = supply;
+            _personDAL = person;
         }
 
         public SupplyDTO AddSupply(SupplyDTO supply)
@@ -48,6 +50,26 @@ namespace BusinessLogic.Concrete
         {
             List<SupplyDTO> price = _supplyDAL.GetAllSupply().OrderBy(p => p.PriceUnit).ToList(); 
             return price;
+        }
+
+        public List<string> GetNameCategory()
+        {
+            List<string> names = new List<string>();
+            foreach(CategoryDTO category in _categoryDAL.GetAllCategory())
+            {
+                names.Add(category.CategoryName);
+            }
+            return names;
+        }
+
+        public List<string> GetPersonLogin()
+        {
+            List<string> persLog = new List<string>();
+            foreach (PersonDTO person in _personDAL.GetAllPerson())
+            {
+                persLog.Add(person.Login);
+            }
+            return persLog;
         }
 
         public SupplyDTO GetSupplyById(int supplyID)
